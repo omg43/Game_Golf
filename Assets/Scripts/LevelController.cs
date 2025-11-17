@@ -1,7 +1,9 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LevelController : MonoBehaviour
 {
+    [Header("Spawn")]
     [SerializeField] private int m_misseCount;
     [SerializeField] private StomeSpawner spawner;
     [SerializeField] [Min(0)] private float m_spanwRate = 0.5f;
@@ -9,10 +11,16 @@ public class LevelController : MonoBehaviour
     private int m_currentMisseCount;
     private float m_time;
 
+    [Header("Score")]
+    [SerializeField] private Text m_scoreText;
+    private int m_score = 0;
+
     private void Awake()
     {
         m_currentMisseCount = m_misseCount;
+        ScoreUp(0);
     }
+
     private void Update()
     {
         if(m_time >= m_spanwRate)
@@ -26,13 +34,15 @@ public class LevelController : MonoBehaviour
         }
         m_time += Time.deltaTime;
     }
+
     private void OnHitStone(Stone stone)
     {
         stone.Hit -= OnHitStone;
         stone.Missed -= OnMissed;
 
-        Debug.Log("Score");
+        ScoreUp(1);
     }
+
     private void OnMissed(Stone stone)
     {
         stone.Hit -= OnHitStone;
@@ -42,5 +52,12 @@ public class LevelController : MonoBehaviour
         {
             Debug.Log("Game over");
         }
+    }
+
+    public void ScoreUp(int _score)
+    {
+        m_score += _score;
+
+        m_scoreText.text = $"Score: {m_score}";
     }
 }
