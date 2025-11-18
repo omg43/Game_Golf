@@ -10,6 +10,7 @@ public class LevelController : MonoBehaviour
 
     private int m_currentMisseCount;
     private float m_time;
+    [SerializeField] private ScoreMeneger m_scoreMeneger;
 
     [Header("Score")]
     [SerializeField] private Text m_scoreText;
@@ -37,21 +38,24 @@ public class LevelController : MonoBehaviour
 
     private void OnHitStone(Stone stone)
     {
-        stone.Hit -= OnHitStone;
-        stone.Missed -= OnMissed;
+        Unsibscribe(stone);
 
-        ScoreUp(1);
+        m_scoreMeneger.Increase();
     }
 
     private void OnMissed(Stone stone)
     {
-        stone.Hit -= OnHitStone;
-        stone.Missed -= OnMissed;
-        m_currentMisseCount--;
-        if(m_currentMisseCount <= 0)
+        Unsibscribe(stone);
+        if (m_currentMisseCount <= 0)
         {
             Debug.Log("Game over");
         }
+    }
+
+    private void Unsibscribe(Stone stone)
+    {
+        stone.Missed -= OnMissed;
+        stone.Hit -= OnHitStone;
     }
 
     public void ScoreUp(int _score)
