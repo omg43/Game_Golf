@@ -1,13 +1,14 @@
+using Assets.Scripts.States;
 using Golf;
 using UnityEngine;
 
-public class BootstrapState : MonoBehaviour
+public class BootstrapState : StateBase
 {
     [SerializeField]private PlayerController m_player;
     [SerializeField]private GameStateMashine m_gameMashine;
     [SerializeField] private LevelController m_levelController;
 
-    public void Initisialize(GameStateMashine gameStateMashine)
+    public override void Initialize(GameStateMashine gameStateMashine)
     {
         m_levelController.enabled = false;
         m_player.enabled = false;
@@ -15,10 +16,10 @@ public class BootstrapState : MonoBehaviour
         m_gameMashine = gameStateMashine;
     }
 
-    public void Enter() 
+    public override void Enter() 
     {
         m_gameMashine.Enter<MainMenuState>();
     }
-    public void Exit() { }
+    public override void Exit() { }
 
 }

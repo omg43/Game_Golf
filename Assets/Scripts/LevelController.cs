@@ -51,14 +51,14 @@ public class LevelController : MonoBehaviour
 
     private void OnHitStone(Stone stone)
     {
-        Unsibscribe(stone);
+        Unsubscribe(stone);
 
         m_scoreMeneger.Increase();
     }
 
     private void OnMissed(Stone stone)
     {
-        Unsibscribe(stone);
+        Unsubscribe(stone);
 
         m_currentMisseCount--;
         if (m_currentMisseCount <= 0)
@@ -76,7 +76,7 @@ public class LevelController : MonoBehaviour
         }
     }
 
-    private void Unsibscribe(Stone stone)
+    private void Unsubscribe(Stone stone)
     {
         stone.Missed -= OnMissed;
         stone.Hit -= OnHitStone;

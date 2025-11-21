@@ -2,7 +2,9 @@ using TMPro;
 using UnityEngine;
 using Golf;
 using UnityEngine.UI;
-public class GameOverState : MonoBehaviour
+using Assets.Scripts.States;
+using Assets.Scripts;
+public class GameOverState : StateBase
 {
     [SerializeField] private GameStateMashine m_gameStateMashine;
     [SerializeField] private PlayerController m_player;
@@ -14,20 +16,22 @@ public class GameOverState : MonoBehaviour
     [SerializeField] private Button m_backOnMenu;
     [SerializeField] private ScoreMeneger m_scoreMeneger;
 
-    public void Initisialize(GameStateMashine gameStateMashine)
+    public override void Initialize(GameStateMashine gameStateMashine)
     {
         m_gameOverPanel.SetActive(false);
         m_gameStateMashine = gameStateMashine;
     }
 
-    public void Enter()
+    public override void Enter()
     {
         m_scoreText.text = m_scoreMeneger.score.ToString();
+        m_scoreMeneger.UpdateRecord();
+       
         m_backOnMenu.onClick.AddListener(OnClicked);
         m_gameOverPanel.SetActive(true);   
     }
 
-    public void Exit()
+    public override void Exit()
     {
         m_gameOverPanel.SetActive(false);
     }

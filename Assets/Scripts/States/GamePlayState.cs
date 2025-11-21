@@ -1,10 +1,11 @@
+using Assets.Scripts.States;
 using Golf;
 using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GamePlayState : MonoBehaviour
+public class GamePlayState : StateBase
 {
     [SerializeField] private GameStateMashine m_gameStateMashine;
     [SerializeField] private PlayerController m_player;
@@ -13,20 +14,21 @@ public class GamePlayState : MonoBehaviour
     [SerializeField] private ScoreMeneger m_scoreMeneger;
 
     [SerializeField] private TextMeshProUGUI m_scoreText;
+    [SerializeField] private GameObject m_gamePanel;
 
-    public void Initisialize(GameStateMashine gameStateMashine)
+    public override void Initialize(GameStateMashine gameStateMashine)
     {
-        m_scoreText.gameObject.SetActive(false);
+        m_gamePanel.SetActive(false);
         m_gameStateMashine = gameStateMashine;
     }
 
-    public void Enter ()
+    public override void Enter ()
     {
         m_scoreMeneger.Reset();
         m_scoreMeneger.ScoreChanged += OnScoreChanged;
 
         OnScoreChanged(m_scoreMeneger.score);
-        m_scoreText.gameObject.SetActive(true);
+        m_gamePanel.SetActive(true);
 
         m_levelController.enabled = true;
         m_player.enabled = true;
@@ -42,11 +44,11 @@ public class GamePlayState : MonoBehaviour
         m_scoreText.text = score.ToString();
     }
 
-    public void Exit ()
+    public override void Exit ()
     {
         m_levelController.enabled = false;
         m_player.enabled = false;
-        m_scoreText.gameObject.SetActive(false);
+        m_gamePanel.SetActive(false);
         m_levelController.Finished -= OnFinished;
     }
 }
