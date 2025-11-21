@@ -1,9 +1,12 @@
 using System;
 using System.Runtime.CompilerServices;
+using System.Xml.Serialization;
 using UnityEngine;
 
 public class ScoreMeneger : MonoBehaviour
 {
+    public event Action<int> ScoreChanged;
+
     private int m_score;
     public int score {  
         get =>  m_score;
@@ -11,12 +14,15 @@ public class ScoreMeneger : MonoBehaviour
         {
             m_score = value;
             Debug.Log($"Score: {score}");
-            ScoreChanger?.Invoke(value);
+            ScoreChanged?.Invoke(value);
         }
     }
-    public event Action<int> ScoreChanger;
     public void Increase()
     {
         score++;
+    }
+    public void Reset()
+    {
+        score = 0;
     }
 }
