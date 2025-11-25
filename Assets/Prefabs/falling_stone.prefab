@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8142545150596209431}
   - component: {fileID: 8165854864650905535}
   - component: {fileID: -6760797943621207417}
-  - component: {fileID: 2580045321846944489}
+  - component: {fileID: 4097469264483757379}
   m_Layer: 0
   m_Name: falling_stone
   m_TagString: Untagged
@@ -141,7 +141,7 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: d1fd41beb70267947bc1c996df07593d, type: 3}
---- !u!114 &2580045321846944489
+--- !u!114 &4097469264483757379
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -152,4 +152,6 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e834e08d12c0ed2488944505763a6433, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CollisionDetector
+  m_EditorClassIdentifier: Assembly-CSharp::Stone
+  projectile: {fileID: 11400000, guid: 21d316a756e407741a978b3c12ee8c0f, type: 2}
+  levelController: {fileID: 0}

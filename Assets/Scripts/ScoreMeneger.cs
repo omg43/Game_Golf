@@ -7,6 +7,7 @@ using UnityEngine;
 public class ScoreMeneger : MonoBehaviour
 {
     public event Action<int> ScoreChanged;
+    public event Action<int> ScoreIncrease;
     public event Action<int> RecordChanged;
 
     private int m_score;
@@ -39,9 +40,10 @@ public class ScoreMeneger : MonoBehaviour
             PlayerPrefs.SetInt(GlobalContants.Record, score);
         }
     }
-    public void Increase()
+    public void Increase(int _addScore)
     {
-        score++;
+        score += _addScore;
+        ScoreIncrease?.Invoke(_addScore);
     }
     public void Reset()
     {

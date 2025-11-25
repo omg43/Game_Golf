@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 797973825216704443}
   - component: {fileID: 8083512189426849643}
   - component: {fileID: 1196342689938346697}
-  - component: {fileID: -8637849739112621942}
+  - component: {fileID: -6414452867717051558}
   m_Layer: 0
   m_Name: falling_stone 1
   m_TagString: Untagged
@@ -69,7 +69,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 58d53420af384224ea4cfee8973d18cb, type: 2}
+  - {fileID: 2100000, guid: dd6ab47a42262d14d8d6f7bef5481377, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -140,8 +140,8 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 1
   m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: d1fd41beb70267947bc1c996df07593d, type: 3}
---- !u!114 &-8637849739112621942
+  m_Mesh: {fileID: 4300000, guid: 455995b8866658b42b3da7b1cab18535, type: 3}
+--- !u!114 &-6414452867717051558
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -152,5 +152,6 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e834e08d12c0ed2488944505763a6433, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CollisionDetector
-  m_force: 1111
+  m_EditorClassIdentifier: Assembly-CSharp::Stone
+  projectile: {fileID: 11400000, guid: 691562e0ccbe07f4f92443b1b8635dde, type: 2}
+  levelController: {fileID: 0}

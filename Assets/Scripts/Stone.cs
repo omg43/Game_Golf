@@ -1,43 +1,58 @@
 using System;
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.Events;
+using Assets.Scripts.Data;
 
 
 [RequireComponent(typeof(Rigidbody))]
 public class Stone : MonoBehaviour
 {
-    public event Action<Stone> Hit;
-    public event Action<Stone> Missed;
+    public event Action Hit;
+    public event Action Missed;
+
+    public event Action<Stone> AddScore;
+    public event Action<Stone> RemoveHp;
 
     private Rigidbody m_rb;
 
-    [SerializeField] private Stone[] m_data;
-    private Stone m_curretData;
+    public Projectile projectile;
+
+    public LevelController levelController;
+
+    public int score { get; private set; } = 1;
 
     private void Awake()
     {
+        projectile.stone = this;
         m_rb = GetComponent<Rigidbody>();
-        //m_curretData = m_data[UnityEngine.Random.Range()];
+        projectile.OnProjectileInitialize();
     }
     public void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.GetComponent<Stick>())
         {
-            Hit?.Invoke(this);
+            //OnHit();
+            Hit?.Invoke();
+            //нужно подписываться каждый раз когда обьект создаектся, 
+            // чтобы отслеживать и пассивыне способности или другие
         }
         else
         {
-            Missed?.Invoke(this);
+            //OnMissed();
+            Missed?.Invoke();
+            //и тут тоже
         }
     }
 
-    public virtual void OnHit()
+    public void OnAddScore(int _score)
     {
-
+        score = _score;
+        AddScore?.Invoke(this);
     }
-    public virtual void OnMissed()
+    public void OnRemoveHp()
     {
-
+        RemoveHp?.Invoke(this);
     }
 
     public void AddForce(Vector3 force)
