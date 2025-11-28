@@ -19,23 +19,23 @@ public class LevelController : MonoBehaviour
     [SerializeField] private StomeSpawner m_stoneSpawner;
     [Min(0)] public float m_spanwRate = 0.5f;
 
+    [Min(1)] [SerializeField] private int m_maxHealth = 2;
     private int m_currentHealthCount;
     public int currentHealthCount
     {
         get => m_currentHealthCount;
         private set
         {
-            Debug.Log("@");
             m_currentHealthCount = value;
+            if(m_currentHealthCount > m_maxHealth)
+            {
+                m_currentHealthCount = m_maxHealth;
+            }
             HealthChanged?.Invoke(value);
-            Debug.Log("Invoke");
         }
     }
     private float m_time;
     private List<Stone> m_stones;
-
-    [Header("Score")]
-    [SerializeField] private Text m_scoreText;
 
     private void Awake()
     {
@@ -45,6 +45,11 @@ public class LevelController : MonoBehaviour
     public void Initialize()
     {
         m_currentHealthCount = m_healthCount;
+    }
+
+    public void ChangeMaxHealt()
+    {
+        m_maxHealth++;
     }
 
     public void IncreaseHealth(int heal)

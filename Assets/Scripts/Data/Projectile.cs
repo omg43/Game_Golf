@@ -39,28 +39,12 @@ namespace Assets.Scripts.Data
 
         public virtual void OnLevelUp()
         {
-
+            level++;
         }
         public void Unscribe()
         {
             stone.Hit -= OnHitClub;
             stone.Missed -= OnMissed;
-        }
-    }
-    [CreateAssetMenu(fileName = "HealHeart", menuName = "Projectile/Heart Projectile")]
-    public class HealHeart : Projectile
-    {
-        [SerializeField] private int amountHeal = 1;
-
-        public override void OnLevelUp()
-        {
-            amountHeal++;
-        }
-
-        public override void OnHitClub()
-        {
-            stone.levelController.IncreaseHealth(amountHeal);
-            
         }
     }
 }

@@ -32,16 +32,11 @@ public class Stone : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<Stick>())
         {
-            //OnHit();
             Hit?.Invoke();
-            //нужно подписываться каждый раз когда обьект создаектся, 
-            // чтобы отслеживать и пассивыне способности или другие
         }
         else
         {
-            //OnMissed();
             Missed?.Invoke();
-            //и тут тоже
         }
     }
 
